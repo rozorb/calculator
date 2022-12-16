@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+h1 {
+    margin: 0;
+}
+
+.container {
+    background-color: grey;
+    padding: 8px;
+    width: fit-content;
+}
+.display {
+    padding: 35px 240px;
+    margin: 5px;
+    background-color: rgba(236, 235, 240, 0.7);
+}
+
+.contents {
+    display: flex;
+    gap: 5px;
+
+}
+
+button {
+    padding: 36px 60px;
+}
+
+#clear {
+    padding: 36px 50px;
+}
+.orderNumbers {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.operators {
+    display: flex;
+    flex-direction: column;
+}

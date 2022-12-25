@@ -18,9 +18,30 @@ numbers.forEach(number => number.addEventListener('click', function(e) {
 }));
 
 operators.forEach(operator => operator.addEventListener('click', function(e) {
-    console.log(e.target.textContent);
+    getOperator(e.target.textContent);
+    prev.textContent = previousDisplay + '' + chosenOperator;
+    curr.textContent = currentDisplay;
 }));
 
+equal.addEventListener('click', function() {
+    if(previousDisplay != '' && currentDisplay != '') {
+        solve()
+        prev.textContent = '';
+            if(previousDisplay.length <= 5){
+                curr.textContent = previousDisplay;
+            } else{
+                curr.textContent = previousDisplay.slice(0,5) + "...";
+            }
+    }
+    
+});
+
+decimal.addEventListener("click", function (){
+    prev.textContent = currentDisplay;
+    currentDisplay += '.';
+    curr.textContent = currentDisplay;
+
+})
 clear.addEventListener("click", function (){
     currentDisplay = '';
     previousDisplay = '';
@@ -29,6 +50,34 @@ clear.addEventListener("click", function (){
     prev.textContent = previousDisplay;
 });
 
+function solve() {
+    previousDisplay = Number(previousDisplay);
+    currentDisplay = Number(currentDisplay);
+
+    if(chosenOperator === "+"){
+        previousDisplay += currentDisplay;
+    } else if(chosenOperator === "-"){
+        previousDisplay -= currentDisplay;
+    } else if(chosenOperator === "*"){
+        previousDisplay *= currentDisplay;
+    } else{
+        previousDisplay /= currentDisplay;
+    }
+
+    previousDisplay = roundNumber(previousDisplay);
+    previousDisplay = previousDisplay.toString();
+    currentDisplay = previousDisplay.toString();
+}
+
+function roundNumber(num){
+    return Math.round(num * 1000) / 1000;
+}
+
+function getOperator(op) {
+    chosenOperator = op;
+    previousDisplay = currentDisplay;
+    currentDisplay = '';
+}
 function getNumber (num) {
     if (currentDisplay.length <= 5) {
         currentDisplay += num;
@@ -36,39 +85,3 @@ function getNumber (num) {
 }
 
 
-
-
-
-
-
-
-
-function add(a,b) {
-    console.log('inside add function '+ a + ' ' + b );
-    return a + b;
-}
-
-function subtract(a,b) {
-    return a - b;
-}
-
-function multiply(a,b) {
-    return a * b;
-}
-
-function divide(a,b) {
-    return a / b;
-}
-
-function operate(operator, a, b) {
-    if(operator === 'add'){
-        console.log('inside add condition '+ a + ' ' + b );
-        return add(a,b);
-    } else if(operator === 'subtract'){
-        return subtract(a,b);
-    } else if(operator === 'multiply'){
-        return multiply(a,b);
-    } else if(operator === 'divide'){
-        return divide (a,b);
-    }
-}
